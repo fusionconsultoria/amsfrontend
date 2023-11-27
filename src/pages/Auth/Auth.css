@@ -1,0 +1,45 @@
+#login,
+#register {
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 2em 1.5em;
+  max-width: 40%;
+  margin: 1.5em auto;
+  margin-top: 5rem;
+}
+
+.border-input {
+  border-color: gray;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+  #login,
+  #register {
+    max-width: 50%;
+    padding: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #login,
+  #register {
+    max-width: 70%;
+    padding: 1em;
+  }
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  /* Ajuste a posição conforme necessário */
+  transform: translateY(-50%);
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+.border-input {
+    border-color: gray;
+}
+
+.textarea-input {
+    border-color: gray;
+    resize: none;
+    height: 5rem;
+}
+
+.textarea-input-large {
+    border-color: gray;
+    resize: none;
+    height: 8rem;
+}
+
+.bordered-paragraph {
+    min-height: 5rem;
+    border: 1px solid gray; /* Estilo da borda */
+    padding: 10px; /* Espaçamento interno para a borda */
+    border-radius: 8px; /* Bordas arredondadas (opcional) */
+}

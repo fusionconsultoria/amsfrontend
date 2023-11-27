@@ -1,0 +1,37 @@
+.modulo {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 2em;
+    max-width: 50%;
+    margin: 8rem auto;
+    min-height: 15rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .modulo .titulo-modulo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  
+  .modulo .form-group {
+    margin-bottom: 1em; /* Ajusta o espaçamento entre o input e o botão */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .modulo {
+      max-width: 50%;
+      padding: 1.5em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modulo {
+      max-width: 70%;
+      padding: 1em;
+    }
+  }
+  
