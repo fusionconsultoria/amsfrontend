@@ -9,9 +9,9 @@ const register = async (data) => {
       const jsonData = await res.json();
       console.log("Resposta da API:", jsonData); // Registre os dados da resposta
       return jsonData;
-  } catch (error) {
-      console.error("Erro na API:", error);
-      throw error; // Rejeite o erro para ser capturado na função de chamada
+  } catch (errors) {
+      console.error("Erro na API:", errors);
+      throw errors; // Rejeite o erro para ser capturado na função de chamada
   }
 };
 
