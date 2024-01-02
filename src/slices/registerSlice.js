@@ -12,12 +12,15 @@ const initialState = {
 export const register = createAsyncThunk(
     "register/register",
     async (user, thunkAPI) => {
-        try {
-            const data = await registerService.register(user);
-            return data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
+
+        const data = await registerService.register(user);
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0]);
         }
+
+        return data;
     }
 );
 
