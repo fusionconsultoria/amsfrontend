@@ -37,7 +37,6 @@ export const registerSlice = createSlice({
             .addCase(register.pending, (state) => {
                 state.loading = true;
                 state.error = null;
-                state.message = null;
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
@@ -49,7 +48,6 @@ export const registerSlice = createSlice({
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                state.message = null;
                 // Note: You may handle the error as needed.
             })
     },
