@@ -78,6 +78,11 @@ function NavComponent() {
                                     <NavDropdown.Item href={`/processoNegocio`}>
                                         Processos de Negócio
                                     </NavDropdown.Item>
+                                    {user &&  user.role == "ADMIN" && (
+                                        <NavDropdown.Item href={`/register`}>
+                                            Cadastrar
+                                        </NavDropdown.Item>
+                                    )}
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleLogout}>
                                         Logout
@@ -106,7 +111,6 @@ function NavComponent() {
                                 navbarScroll
                             >
                                 <Nav.Link style={{ fontSize: '18px' }} href={`/login`}>Login</Nav.Link>
-                                <Nav.Link style={{ fontSize: '18px' }} href={`/register`}>Cadastrar</Nav.Link>
                             </Nav>
                         </>
                     )}

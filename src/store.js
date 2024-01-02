@@ -6,6 +6,7 @@ import historyReducer from "./slices/historySlice";
 import moduloReducer from "./slices/moduloSlice";
 import submoduloReducer from "./slices/submoduloSlice";
 import processoNegocioReducer from "./slices/processoNegocioSlice";
+import registerReducer from "./slices/registerSlice";
 
 export const store = configureStore({
     reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
         modulo: moduloReducer,
         submodulo: submoduloReducer,
         processoNegocio: processoNegocioReducer,
+        register: registerReducer,
     },
 });

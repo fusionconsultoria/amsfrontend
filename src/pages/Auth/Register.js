@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
-import { register, reset } from "../../slices/authSlice";
+import { register, reset } from "../../slices/registerSlice";
 
 function Register() {
 
@@ -20,6 +20,7 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [role, setRole] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -32,7 +33,7 @@ function Register() {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    const { loading, error } = useSelector((state) => state.auth);
+    const { loading, error, message } = useSelector((state) => state.register);
 
     const dispatch = useDispatch();
 
@@ -44,6 +45,7 @@ function Register() {
             email,
             password,
             confirmPassword,
+            role
         };
 
         dispatch(register(user));
@@ -117,6 +119,19 @@ function Register() {
                         </span>
                     </div>
                 </Form.Group>
+                <Form.Group className="mb-3 border-input" controlId="formBasicRole">
+                    <Form.Label>Atribuição</Form.Label>
+                    <Form.Select
+                        className="mb-3 border-input"
+                        aria-label="Role"
+                        onChange={(e) => setRole(e.target.value)}  // Atualiza o estado role
+                        value={role}
+                        required>
+                        <option>Selecione a Atribuição</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="OPER">OPER</option>
+                    </Form.Select>
+                </Form.Group>
 
                 {!loading && <Button variant="warning" type="submit">
                     Cadastrar
@@ -125,6 +140,7 @@ function Register() {
                     Aguarde...
                 </Button>}
                 {error && <Message msg={error} type="error" />}
+                {message && <Message msg={message} type="success" />}
             </Form>
         </div >
     )
