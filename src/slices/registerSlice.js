@@ -29,6 +29,7 @@ export const registerSlice = createSlice({
             state.loading = false;
             state.error = false;
             state.success = false;
+            state.message = null;
         },
     },
     extraReducers: (builder) => {
