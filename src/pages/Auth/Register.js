@@ -37,6 +37,14 @@ function Register() {
 
     const dispatch = useDispatch();
 
+    // Reset component message
+    function resetComponentMessage() {
+        setTimeout(() => {
+            dispatch(reset());
+        }, 2000);
+    }
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -49,6 +57,8 @@ function Register() {
         };
 
         dispatch(register(user));
+
+        resetComponentMessage();
     };
 
 
