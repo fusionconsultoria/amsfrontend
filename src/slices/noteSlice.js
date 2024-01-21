@@ -175,7 +175,6 @@ export const noteSlice = createSlice({
                 state.error = null;
 
                 state.notes = state.notes.filter((note) => {
-                    console.log('oiiii' + action.payload.id);
                     return note._id !== action.payload.id;
                 });
 

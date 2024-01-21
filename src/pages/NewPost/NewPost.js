@@ -102,7 +102,6 @@ const NewPost = () => {
         setProcessoNegocio(value);
     }
 
-
     const onSubmit2 = (e) => {
 
         e.preventDefault();
