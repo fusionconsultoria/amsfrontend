@@ -1,6 +1,5 @@
 import { api, requestConfig } from "../utils/config";
 
-// Get user details
 const profile = async (data, token) => {
     const config = requestConfig("GET", data, token);
 
@@ -15,7 +14,6 @@ const profile = async (data, token) => {
     }
 };
 
-// Update user details
 const updateProfile = async (data, token) => {
     const config = requestConfig("PUT", data, token);
 
@@ -30,7 +28,6 @@ const updateProfile = async (data, token) => {
     }
 };
 
-// Get user details
 const getUserDetails = async (id) => {
     const config = requestConfig("GET");
 
@@ -45,12 +42,40 @@ const getUserDetails = async (id) => {
     }
 };
 
+const getAllUsers = async (token) => {
+    const config = requestConfig("GET", null, token);
 
+    try {
+        const res = await fetch(api + "/users/", config)
+            .then((res) => res.json())
+            .catch((err) => err);
+
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteUser = async (id, token) => {
+    const config = requestConfig("DELETE", "", token);
+
+    try {
+        const res = await fetch(api + "/users/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err);
+
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const userService = {
     profile,
     updateProfile,
     getUserDetails,
+    getAllUsers,
+    deleteUser
 };
 
 export default userService;

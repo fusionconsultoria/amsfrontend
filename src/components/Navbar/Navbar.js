@@ -1,6 +1,5 @@
 // Components
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,14 +8,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import logo from '../../assets/logo.png'
-
-// Hooks
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../hooks/useAuth";
-
-// Redux
 import { logout, reset } from '../../slices/authSlice';
 
 function NavComponent() {
@@ -75,13 +70,18 @@ function NavComponent() {
                                     <NavDropdown.Item href={`/profile`}>
                                         Perfil
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href={`/processoNegocio`}>
-                                        Processos de Negócio
-                                    </NavDropdown.Item>
-                                    {user &&  user.role == "ADMIN" && (
-                                        <NavDropdown.Item href={`/register`}>
-                                            Cadastrar
-                                        </NavDropdown.Item>
+                                    {user && user.role === "ADMIN" && (
+                                        <>
+                                            <NavDropdown.Item href={`/register`}>
+                                                Cadastrar
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href={`/processoNegocio`}>
+                                                Processos de Negócio
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href={`/users`}>
+                                                Usuários
+                                            </NavDropdown.Item>
+                                        </>
                                     )}
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleLogout}>

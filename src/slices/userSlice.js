@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "../services/userService";
 
 const initialState = {
+    users: [],
     user: {},
     error: false,
     success: false,
@@ -9,7 +10,6 @@ const initialState = {
     message: null,
 };
 
-// Get user details, for edit data
 export const profile = createAsyncThunk(
     "user/profile",
     async (user, thunkAPI) => {
@@ -21,7 +21,6 @@ export const profile = createAsyncThunk(
     }
 );
 
-// Update user details
 export const updateProfile = createAsyncThunk(
     "user/update",
     async (user, thunkAPI) => {
@@ -29,7 +28,6 @@ export const updateProfile = createAsyncThunk(
 
         const data = await userService.updateProfile(user, token);
 
-        // Check for errors
         if (data.errors) {
             return thunkAPI.rejectWithValue(data.errors[0]);
         }
@@ -38,7 +36,6 @@ export const updateProfile = createAsyncThunk(
     }
 );
 
-// Get user details
 export const getUserDetails = createAsyncThunk(
     "user/get",
     async (id, thunkAPI) => {
@@ -46,6 +43,31 @@ export const getUserDetails = createAsyncThunk(
 
         const data = await userService.getUserDetails(id, token);
 
+        return data;
+    }
+);
+
+export const getAllUsers = createAsyncThunk(
+    "user/getAll",
+    async (_, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token;
+
+        const data = await userService.getAllUsers(token);
+
+        return data;
+    }
+);
+
+export const deleteUser = createAsyncThunk(
+    "user/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token;
+
+        const data = await userService.deleteUser(id, token);
+
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0]);
+        }
 
         return data;
     }
@@ -96,7 +118,38 @@ export const userSlice = createSlice({
                 state.success = true;
                 state.error = null;
                 state.user = action.payload;
-            });
+            })
+            .addCase(getAllUsers.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                console.log(action.payload);
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+                state.users = action.payload.users;
+            })
+            .addCase(deleteUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.error = null;
+
+                state.users = state.users.filter((user) => {
+                    return user._id !== action.payload.id;
+                });
+
+                state.message = action.payload.message;
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.user = null;
+            })
     },
 });
 

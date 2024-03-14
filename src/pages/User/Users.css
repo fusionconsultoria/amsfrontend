@@ -1,0 +1,47 @@
+.users {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+}
+
+.users h2 {
+    font-size: 2.2em;
+    margin-bottom: 0.5em;
+}
+
+.users p {
+    margin-bottom: 0.1em;
+}
+
+.post_user_row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #c4c4c4;
+    width: 80%;
+    padding: 10px;
+}
+
+.titulo_user {
+    font-size: 1em; /* Tamanho de fonte para o título */
+    flex: 1; /* Permite que o título cresça e encolha para se ajustar ao espaço disponível */
+    text-align: left;
+}
+
+.post_user_row button,
+.post_user_row a {
+    margin: 5px;
+    height: 30px;
+    width: 4rem;
+    font-size: 0.7em;
+}
+.btn.btn-dark {
+    border-radius: 0;
+}
+
+.btn.btn-outline {
+    padding: 7px 10px; /* Reduzir o preenchimento para economizar espaço em telas menores */
+}

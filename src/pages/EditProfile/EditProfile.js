@@ -2,33 +2,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./EditProfile.css"
-
-// Hooks
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-// Redux
 import { profile, updateProfile, resetMessage } from "../../slices/userSlice";
-
-// Components
 import Message from "../../components/Message/Message";
 
 const Profile = () => {
     const dispatch = useDispatch();
-
     const { user, message, error, loading } = useSelector((state) => state.user);
-
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // Load user data
     useEffect(() => {
         dispatch(profile());
     }, [dispatch]);
 
-    // fill user form
     useEffect(() => {
+        console.log("user:", user);
         if (user) {
             setNome(user.nome);
             setEmail(user.email);
@@ -38,28 +29,25 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Gather user data from states
+
         const userData = {
             nome,
             email
         };
 
-
         if (password) {
             userData.password = password;
         }
 
-        // build form data
         const formData = new FormData();
 
         const userFormData = Object.keys(userData).forEach((key) =>
             formData.append(key, userData[key])
         );
 
-
         formData.append("user", userFormData);
 
-        await dispatch(updateProfile(userData));
+        dispatch(updateProfile(userData));
 
         setTimeout(() => {
             dispatch(resetMessage());
@@ -85,6 +73,7 @@ const Profile = () => {
                         onChange={(e) => setNome(e.target.value)}
                         value={nome || ""}
                         className='border-input'
+                        autoComplete="off"
                     />
                 </Form.Group>
                 <Form.Group
@@ -112,7 +101,7 @@ const Profile = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password || ""}
                         className='border-input'
-                        
+
                     />
                 </Form.Group>
 

@@ -1,16 +1,11 @@
 import "./Dashboard.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-
-
-// Redux
 import { getUserNotes, deleteNote, resetMessage } from "../../slices/noteSlice"
-
 
 const Dashboard = () => {
     const { id } = useParams();
@@ -24,20 +19,18 @@ const Dashboard = () => {
     } = useSelector((state) => state.note);
 
 
-    // Load user data
     useEffect(() => {
         dispatch(getUserNotes(id));
     }, [dispatch, id]);
 
-    // Reset component message
     function resetComponentMessage() {
         setTimeout(() => {
             dispatch(resetMessage());
         }, 2000);
     }
 
-    // Exclude a note
     const handleDelete = (id) => {
+
         dispatch(deleteNote(id));
 
         resetComponentMessage();

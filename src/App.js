@@ -20,10 +20,11 @@ import Editar from './pages/Editar/Editar';
 import History from './pages/History/History';
 import Narrativas from './pages/Narrativas/Narrativas';
 import Modulo from "./pages/Modulo/Modulo";
+import Users from "./pages/User/Users";
 
 function App() {
 
-  const { auth, loading } = useAuth();
+  const { auth, loading, isAdmin } = useAuth();
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -45,7 +46,7 @@ function App() {
             />
             <Route
               path="/processoNegocio"
-              element={auth ? <Modulo /> : <Navigate to="/login" />}
+              element={auth && isAdmin ? <Modulo /> : <Navigate to="/login" />}
             />
             <Route
               path="/profile"
@@ -61,7 +62,7 @@ function App() {
             />
             <Route
               path="/editar/:id"
-              element={auth ? <Editar /> : <Navigate to="/login" />}
+              element={auth && isAdmin ? <Editar /> : <Navigate to="/login" />}
             />
 
             <Route
@@ -82,7 +83,11 @@ function App() {
             />
             <Route
               path="/register"
-              element={auth ? <Register /> : <Navigate to="/login" />}
+              element={auth && isAdmin ? <Register /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/users"
+              element={auth && isAdmin ? <Users /> : <Navigate to="/login" />}
             />
             <Route />
           </Routes>
