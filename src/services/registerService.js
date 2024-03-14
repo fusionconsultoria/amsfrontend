@@ -9,7 +9,7 @@ const register = async (data) => {
       const jsonData = await res.json();
       return jsonData;
   } catch (error) {
-      throw error; // Rejeite o erro para ser capturado na função de chamada
+      throw error; 
   }
 };
 
